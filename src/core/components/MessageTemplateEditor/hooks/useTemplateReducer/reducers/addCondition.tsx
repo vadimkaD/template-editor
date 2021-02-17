@@ -1,4 +1,4 @@
-import {Template} from "../../../../MessageTemplateEditor";
+import {Template} from "../../../MessageTemplateEditor";
 import {getEmptyCondition} from "../useTemplateReducer.utils";
 import {AddCondition} from "../useTemplateReducer.types";
 

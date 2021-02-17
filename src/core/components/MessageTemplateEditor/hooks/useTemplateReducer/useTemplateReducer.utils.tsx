@@ -1,5 +1,5 @@
-import {Condition, Template} from "../../../MessageTemplateEditor";
-import {ID} from "../../../MessageTemplateEditor.utils";
+import {Condition, Template} from "../../MessageTemplateEditor";
+import {ID} from "../../MessageTemplateEditor.utils";
 
 export function getEmptyTemplate(): Template {
     return {

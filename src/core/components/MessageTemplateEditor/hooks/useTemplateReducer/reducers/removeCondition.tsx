@@ -1,5 +1,4 @@
-import {Template} from "../../../../MessageTemplateEditor";
-import {getEmptyCondition} from "../useTemplateReducer.utils";
+import {Template} from "../../../MessageTemplateEditor";
 import {RemoveCondition} from "../useTemplateReducer.types";
 
 export function removeCondition(template: Template, action: RemoveCondition): Template {

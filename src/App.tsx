@@ -2,54 +2,38 @@ import React, {useState, useCallback} from 'react';
 
 import {MessageEditorButtonBlock} from "./core/components/MessageEditorButtonBlock/MessageEditorButtonBlock";
 import {MessageTemplateEditor, Template} from "./core/components/MessageTemplateEditor/MessageTemplateEditor";
-import {ID} from "./core/components/MessageTemplateEditor/MessageTemplateEditor.utils";
 
-const templateTest: Template = {
-    body: ['Начальная строка', 'Завершающая строка'],
-    id: 'main',
-    conditions: [{
-        expression: '{firstname}',
-        then: {
-            id: 'firstname',
-            body: ['firstname then body1', 'firstname then body2'],
-            conditions: [{
-                expression: '{lastname}',
-                then: {
-                    id: 'lastname_b4',
-                    body: ['lastname then body'],
-                    conditions: [],
-                },
-                else: {
-                    id: 'lastname_after',
-                    body: ['lastname else body'],
-                    conditions: []
-                }
-            }]
-        },
-        else: {
-            id: 'lastname',
-            body: ['firstname else body'],
-            conditions: []
-        }
-    }]
-};
 
-const empty = {
-    id: ID(),
-    body: ['первая половинавторая половинатретья половина'],
-    conditions: []
-};
+// const empty: Template = {
+//     id: ID(),
+//     body: ['первая половинавторая половинатретья половина'],
+//     conditions: []
+// };
+
+//сорямба, на анимации не осталось времени
 
 function App() {
 
-
-    const [visible, setVisible] = useState<boolean>(false);
-    const onShow = useCallback(() => setVisible(true), [setVisible]);
+    const [template, setTemplate] = useState<Template | undefined>(undefined);
+    const [arrVarNames, setArrVarNames] = useState<Array<string>>(['first_name', 'last_name', 'company', 'position']);
+    const [visible, setVisibleEditor] = useState<boolean>(false);
+    const onShowEditor = useCallback(() => {
+        const arrVarNames: Array<string> = localStorage.arrVarNames ? JSON.parse(localStorage.arrVarNames) : ['first_name', 'last_name', 'company', 'position'];
+        const template: Template = localStorage.template ? JSON.parse(localStorage.template) : undefined;
+        setTemplate(template);
+        setArrVarNames(arrVarNames);
+        setVisibleEditor(true);
+    }, [setVisibleEditor, setTemplate, setArrVarNames]);
+    const onHideEditor = useCallback((e: React.SyntheticEvent) => setVisibleEditor(false), [setVisibleEditor]);
+    const onSaveTemplate = useCallback((template: Template, arrVarNames: Array<string>) => {
+        localStorage.setItem('arrVarNames', JSON.stringify(arrVarNames));
+        localStorage.setItem('template', JSON.stringify(template));
+    }, []);
 
     return (
         visible
-            ? <MessageTemplateEditor template={empty} arrVarNames={['first_name', 'last_name', 'company', 'position']} />
-            : <MessageEditorButtonBlock onClick={onShow} />
+            ? <MessageTemplateEditor template={template} arrVarNames={arrVarNames} onHideEditor={onHideEditor} onSaveTemplate={onSaveTemplate} />
+            : <MessageEditorButtonBlock onClick={onShowEditor} />
     );
 }
 

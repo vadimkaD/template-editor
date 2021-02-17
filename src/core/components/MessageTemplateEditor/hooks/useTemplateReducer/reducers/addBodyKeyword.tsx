@@ -1,4 +1,4 @@
-import {Template} from "../../../../MessageTemplateEditor";
+import {Template} from "../../../MessageTemplateEditor";
 import {AddBodyKeyword, } from "../useTemplateReducer.types";
 
 export function addBodyKeyword(template: Template, action: AddBodyKeyword): Template {

@@ -1,4 +1,4 @@
-import {Template} from "../../../../MessageTemplateEditor";
+import {Template} from "../../../MessageTemplateEditor";
 import { UpdateExpression} from "../useTemplateReducer.types";
 
 export function updateExpression(template: Template, action: UpdateExpression): Template {

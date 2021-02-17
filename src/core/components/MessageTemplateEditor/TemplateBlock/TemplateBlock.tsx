@@ -7,7 +7,7 @@ import {
     OnRemoveCondition,
     OnUpdateExpression,
     UpdateBodyPayload,
-} from "./hooks/useTemplateReducer/useTemplateReducer.types";
+} from "../hooks/useTemplateReducer/useTemplateReducer.types";
 
 export type TemplateBlockProps = {
     template: Template;

@@ -35,6 +35,7 @@ export type FlexProps = {
     maxHeight?: string,
     minWidth?: string,
     minHeight?: string,
+    background?: string,
 } & HTMLAttributes<HTMLDivElement>
 
 export const Flex:FunctionComponent<FlexProps> =
@@ -56,6 +57,7 @@ export const Flex:FunctionComponent<FlexProps> =
         maxWidth = 'none',
         minHeight = 'none',
         minWidth = 'none',
+        background = 'none',
         ...rest
     }) => (
     <div
@@ -77,6 +79,7 @@ export const Flex:FunctionComponent<FlexProps> =
             maxWidth,
             minHeight,
             minWidth,
+            background,
         }}
         {...rest}
     />

@@ -1,6 +1,5 @@
-import {Template} from "../../../../MessageTemplateEditor";
-import {getEmptyCondition} from "../useTemplateReducer.utils";
-import {AddCondition, UpdateBody} from "../useTemplateReducer.types";
+import {Template} from "../../../MessageTemplateEditor";
+import {UpdateBody} from "../useTemplateReducer.types";
 
 export function updateBody(template: Template, action: UpdateBody): Template {
 

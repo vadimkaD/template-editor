@@ -1,5 +1,5 @@
 import {useCallback, useReducer} from "react";
-import {Template} from "../../../MessageTemplateEditor";
+import {Template} from "../../MessageTemplateEditor";
 import {addCondition} from "./reducers/addCondition";
 import {
     Action,

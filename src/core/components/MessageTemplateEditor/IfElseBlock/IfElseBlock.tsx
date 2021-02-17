@@ -8,7 +8,7 @@ import {TemplateBlock} from "../TemplateBlock/TemplateBlock";
 import {
     OnRemoveCondition, OnUpdateExpression,
     UpdateBodyPayload
-} from "../TemplateBlock/hooks/useTemplateReducer/useTemplateReducer.types";
+} from "../hooks/useTemplateReducer/useTemplateReducer.types";
 import {TextareaBlock} from "../TemplateBlock/TextareaBlock";
 
 export type IfElseBlockProps = {
