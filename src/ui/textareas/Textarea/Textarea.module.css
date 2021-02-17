@@ -1,0 +1,14 @@
+.textarea {
+    display: inline-block;
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+}
+
+.normal {
+
+}
+
+.highlight {
+    background-color: lightgoldenrodyellow;
+}

@@ -1,0 +1,24 @@
+.badge {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    display: inline-block;
+    border-radius: 6px;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.green {
+    background-color: darkgreen;
+    border: 1px solid #002a00;
+}
+
+.red {
+    background-color: darkred;
+    border: 1px solid #480000;
+}
+
+.gray {
+    background-color: darkgray;
+    border: 1px solid #3a3a3a;
+}
