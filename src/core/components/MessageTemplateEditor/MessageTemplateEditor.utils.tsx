@@ -40,12 +40,17 @@ export const testTemplate: Template = {
     }]
 }
 
+function escapeRegex(str: string): string {
+    // eslint-disable-next-line no-useless-escape
+    return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
 export function enrichTextWithValues(text: string, values: Variables, arrVarNames: Array<string>): string {
     let finalText: string = text;
 
     for (const arrVarName of arrVarNames) {
         // eslint-disable-next-line no-useless-escape
-        finalText = finalText.replace(new RegExp('\{'+arrVarName+'\}', 'gi'), values[arrVarName] ? values[arrVarName] : '');
+        finalText = finalText.replace(new RegExp('\{'+escapeRegex(arrVarName)+'\}', 'gi'), values[arrVarName] ? values[arrVarName] : '');
     }
     return finalText;
 }
