@@ -66,7 +66,6 @@ describe('Text generation from template', () => {
     };
 
     it('generates empty text from empty template', () => {
-
         const emptyTemplate = getEmptyTemplate();
         const expectedResult = '';
         const result = getTextFromTemplate(emptyTemplate, {}, arrVarNames)
@@ -74,7 +73,6 @@ describe('Text generation from template', () => {
     });
 
     it('generates text from not empty template', () => {
-
         const expectedResult = "Hello !\n\nI just went through your profile and i would love to join your network!\n\nWhere do you work at the moment?\n\nJake\nSoftware Developer\njakelen1232@gmail.com";
         const result = getTextFromTemplate(testTemplate, {}, arrVarNames);
         expect(result).toEqual(expectedResult);
