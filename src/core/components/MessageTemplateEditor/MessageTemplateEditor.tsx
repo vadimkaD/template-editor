@@ -76,7 +76,10 @@ export const MessageTemplateEditor: FunctionComponent<MessageTemplateEditorProps
         setShowPreview(true);
     }, [setShowPreview]);
     const onClosePreview = useCallback((e: React.SyntheticEvent) => {
-        setShowPreview(false);
+        return new Promise(resolve => {
+            setShowPreview(false);
+            resolve(undefined);
+        })
     }, [setShowPreview]);
 
     //это неправильно, лучше вынести показ Preview на уровень выше в App
@@ -132,7 +135,7 @@ export const MessageTemplateEditor: FunctionComponent<MessageTemplateEditorProps
     return (
         <Flex  margin={'0 0 0 5px'}>
             {showPreview
-                ? <MessagePreview arrVarNames={arrVarNames} template={innerTemplate} onClose={onClosePreview} />
+                ? <MessagePreview arrVarNames={arrVarNames} template={innerTemplate} callbackSave={onClosePreview} />
                 : <>
                 <Flex container justifyContent={'center'} margin={'10px 0 15px 0'}>Message Template Editor</Flex>
                 <Flex container width={'100%'} alignItems={'center'} padding={'5px 0'}>

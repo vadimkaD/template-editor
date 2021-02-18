@@ -13,13 +13,13 @@ import {getTextFromTemplate} from "../MessageTemplateEditor/utils/getTextFromTem
 export type MessagePreviewProps = {
     arrVarNames: Array<string>;
     template: Template;
-    onClose: (e: React.SyntheticEvent) => void;
+    callbackSave: (e: React.SyntheticEvent) => Promise<any>;
 }
 //нет времени добавлять троттлинг
 //на моем компе работает без лагов
 //учитывая объем данных (размер шаблона), тормозить не будет нигде, рендер текста занимает меньше 16мс (1 кадр из 60)
 //при больших нагрузках и в иных добавил бы троттлинг с помощью сторонней бесплатной библиотеки
-export const MessagePreview: FunctionComponent<MessagePreviewProps> = ({arrVarNames, template, onClose}) => {
+export const MessagePreview: FunctionComponent<MessagePreviewProps> = ({arrVarNames, template, callbackSave}) => {
 
     const [values, setValues] = useState<Variables>({});
     const onChangeValue = (variable: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +35,7 @@ export const MessagePreview: FunctionComponent<MessagePreviewProps> = ({arrVarNa
               <Flex width={'28px'}/>
               <Flex container justifyContent={'center'}>Message Preview</Flex>
               <Flex width={'28px'}>
-                  <ErrorButton onClick={onClose}>X</ErrorButton>
+                  <ErrorButton onClick={callbackSave}>X</ErrorButton>
               </Flex>
           </Flex>
           <Flex minHeight={'320px'} alignItems={'stretch'} container>
@@ -50,7 +50,7 @@ export const MessagePreview: FunctionComponent<MessagePreviewProps> = ({arrVarNa
           </Flex>
           <Flex width={'100%'} container justifyContent={'center'}>
 
-              <PrimaryButton onClick={onClose}>Close</PrimaryButton>
+              <PrimaryButton onClick={callbackSave}>Close</PrimaryButton>
           </Flex>
       </Flex>
   </Overlay>
