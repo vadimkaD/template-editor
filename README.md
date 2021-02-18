@@ -1,46 +1,97 @@
-# Getting Started with Create React App
+Офлайн задание - Message Template Editor
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Необходимо разработать редактор шаблонов сообщений и виджет предпросмотра сообщений.
 
-## Available Scripts
+Условный скриншот редактора
+https://monosnap.com/file/ZmfoYTNzlOLH6L69TL6JEEXGzV2aGa
 
-In the project directory, you can run:
 
-### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Виджет предпросмотра шаблона сообщений:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Все переменные заполнены
 
-### `yarn test`
+2) Заполнены все переменные, кроме position 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+3) Заполнены только firstname и lastname
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Требования к виджету редактирования шаблона сообщений:
+На вход виджет получает: 
+arrVarNames [required] - массив имен переменных
+template [optional] - шаблон сообщения.
+callbackSave - асинхронная функция сохранения шаблона
+Работа с переменными:
+На основании массива переменных должен быть создан подвиджет из кнопок-имен переменных, обернутых в фигурные скобки. Например, “firstname” -> “{firstname}”.
+Клик по такой переменной должен добавлять ее в последнее место, где был курсор ввода или в начало шаблона, если курсор еще не указывался.
+Кнопка [IF-THEN-ELSE]
+В верхней части виджета где-либо должна быть добавлена кнопка [IF-THEN-ELSE]
+Нажатие на кнопку [IF-THEN-ELSE] должно разбить текущий блок редактирования шаблона сообщения на два блока (текст также разделяется на две части по последней позиции курсора). Между этими блоками добавляется подвиджет [IF-THEN-ELSE].
+Подвиджет [IF-THEN-ELSE]
+Состоит из 3х блоков: IF, THEN и ELSE.
+В каждом из этих блоков пользователь может писать текст, добавлять переменные по нажатию на кнопки добавления переменных, а также добавлять вложенные виджеты [IF-THEN-ELSE].
+Исполняется THEN ветка, если после вычисления IF получилась не пустая строка, в противном случае выполняется ELSE ветка.
+Где-либо внутри блока должна быть предусмотрена кнопка DELETE, нажатие на которую отменяет добавление данного виджета, склеивая блоки над и под ним в один. 
+Кнопка Close закрывает виджет - реализация диалога “сохранить изменения?” не обязательна.
+Кнопка Preview - открывает поверх виджет предпросмотра шаблона.
+Кнопка Save - вызывает callbackSave с актуальным шаблоном.
+Формат шаблона сообщения должен быть разработан в рамках решения данной задачи. Он должен удовлетворять следующим критериям:
+Сериализуется и десериализуется в строку;
+Отсутствие side effects - какой бы текст, кроме имён переменных, не ввел пользователь, он должен обрабатываться строго как текст.
+Если пользователь что-либо вводит в фигурных скобках отличное от заранее указанной переменной, то это должно восприниматься, как обычный текст.
+Особых требований к стилям нет. Иконки к кнопкам добавлять необязательно.
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Требования к виджету предпросмотра шаблона сообщений:
+На вход виджет получает: 
+arrVarNames [required] - массив имен переменных
+template [required] - шаблон сообщения.
+Виджет состоит из трех частей
+Не редактируемая область просмотра сгенерированного сообщения;
+Поля ввода значений переменных
+Кнопка close
+Сгенерированное сообщение должно меняться на лету при вводе значений переменных.
+Визуально всегда должно быть видно, какая переменная какое значение имеет.
+Требований к стилистике и дизайну нет. На скриншотах выше представлен один из возможных вариантов.
+Генератор сообщения на шаблоне должен быть выделен в отдельную функцию.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Требования к функции-генератору сообщений
+На вход функция получает: 
+template [required] - шаблон сообщения
+values [required] - значения переменных (объект вида {name : value}). В объекте могут присутствовать, как лишние пары name & value - должны игнорироваться, так и отсутствовать необходимые - должны интерпретироваться, как пустые значения.
+На выходе сгенерированная строка.
+У функции не должно быть side effects. Не должно быть такого, что какой-либо пользовательский текст интерпретировался, как оператор.
+Функция должна иметь 100% покрытие тестами.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Требования к проекту в целом
+Проект должен быть представлен в виде HTML странички с кнопкой “Message Editor”.
+При нажатии на кнопку “Message Editor” открывается виджет Message Template Editor с переменными:
+	arrVarNames = localStorage.arrVarNames ? JSON.parse(localStorage.arrVarNames) : [‘firstname’, ‘lastname’, ‘company’, ‘position’];
+	template = localStorage.template  ? JSON.parse(localStorage.template) : null;
+	callbackSave - функция, которая записывает шаблон в localStorage.template
+Задача реализуется на React и TypeScript без использования UI-фреймворков. Использование бесплатных сторонних библиотек возможно, но нежелательно.
+Для настройки окружения используйте create-react-app последней версии.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Обязательные требования к решению
+Полная функциональность в соответствии с изложенными требованиями
+Отсутствие багов и потенциальных уязвимостей
+Отсутствие зависаний интерфейса (например, при установке курсора в поле ввода и зажимании клавиши с буквой на клавиатуре).                 
 
-## Learn More
+Рекомендации к выполнению задания
+Не нужно делать поля ввода в виде div с contenteditable = true.
+Использовать изоляцию стилей (предпочтительно css-модули)
+Желательно использовать React hooks
+Желательно использование анимаций
+Наличие комментариев к коду, решение должно быть написано так, чтобы потом его мог легко понять и поддерживать другой разработчик.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Расчет чистого времени на реализацию задания
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Виджет редактирования шаблона - 12 часов
+Функция-генератор сообщений - 4 часов
+Тесты для функции генератора - 4 часа
+Виджет просмотра шаблона - 4 часа
+Прочее 1 час
+
+Итого 25 часов.
